@@ -152,8 +152,7 @@ function signProduct() {
     mkdir -pv "${TARGET_DIRECTORY}/pkg-signed"
     chmod -R 755 "${TARGET_DIRECTORY}/pkg-signed"
 
-    read -p "Please enter the Apple Developer Installer Certificate ID:" APPLE_DEVELOPER_CERTIFICATE_ID
-    productsign --sign "Developer ID Installer: ${APPLE_DEVELOPER_CERTIFICATE_ID}" \
+    productsign --sign "Developer ID Installer: Dawid Owoc (TY2VQ6C2YR)" \
     "${TARGET_DIRECTORY}/pkg/$1" \
     "${TARGET_DIRECTORY}/pkg-signed/$1"
 
@@ -164,6 +163,7 @@ function createInstaller() {
     log_info "Application installer generation process started.(3 Steps)"
     buildPackage
     buildProduct ${PRODUCT}-macos-installer-x64-${VERSION}.pkg
+    signProduct ${PRODUCT}-macos-installer-x64-${VERSION}.pkg
     log_info "Application installer generation steps finished."
 }
 
